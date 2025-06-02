@@ -4,15 +4,17 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import tacos.data.IngredientRepository;
 import tacos.Ingredient.Type;
+
 @SpringBootApplication
 public class TacocloudApplication implements WebMvcConfigurer {
 
     @Bean
+    @Profile("!test")
     public CommandLineRunner dataLoader(IngredientRepository repo){
         return args -> {
             repo.save(new Ingredient("FLTO", "Flour Tortilla", Type.WRAP));
