@@ -1,10 +1,11 @@
 package tacos;
 
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.io.Serial;
@@ -24,8 +25,9 @@ public class TacoOrder implements Serializable {
     private String id;
     private Date placedAt = new Date();
 
-    @ManyToOne
+    @DBRef
     private User user;
+
     public void setUser(User user) { this.user = user; }
     public User getUser() { return user; }
 
